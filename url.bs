@@ -819,9 +819,9 @@ null or a <a for=/>host</a>. It is initially null.
 <p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-port>port</dfn> is either
 null or a 16-bit unsigned integer that identifies a networking port. It is initially null.
 
-<p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-path>path</dfn> is a list of
-zero or more <a>ASCII string</a> holding data, usually identifying a location in
-hierarchical form. It is initially the empty list.
+<p>A <a for=/>URL</a>'s <dfn export for=url id=concept-url-path>path</dfn> is a <a>list</a> of zero
+or more <a>ASCII string</a> holding data, usually identifying a location in hierarchical form. It is
+initially « ».
 
 <p>A  <a for=/>URL</a>'s <dfn export for=url id=concept-url-query>query</dfn> is either
 null or an <a>ASCII string</a> holding data. It is initially null.
@@ -1131,12 +1131,13 @@ different document encoding. Using the <a>UTF-8</a> encoding everywhere solves t
  <li><p>If <var>url</var>'s <a for=url>scheme</a> is not
  "<code>blob</code>", return <var>url</var>.
 
- <li><p>If the first string in <var>url</var>'s <a for=url>path</a> is not in the
- <a>blob URL store</a>, return <var>url</var>. [[!FILEAPI]]
+ <li><p>If <var>url</var>'s <a for=url>path</a> <a for=list>is empty</a> or <var>url</var>'s
+ <a for=url>path</a>[0] is not in the <a>blob URL store</a>, then return <var>url</var>.
+ [[!FILEAPI]]
 
  <li><p>Set <var>url</var>'s <a for=url>object</a> to a <a abstract-op>StructuredClone</a> of the
- entry in the <a>blob URL store</a> corresponding to the first string in <var>url</var>'s
- <a for=url>path</a>. [[!HTML]]
+ entry in the <a>blob URL store</a> corresponding to <var>url</var>'s <a for=url>path</a>[0].
+ [[!HTML]]
 
  <li><p>Return <var>url</var>.
 </ol>
@@ -1320,9 +1321,9 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <var>state</var> to <a>path or authority state</a>, and increase <var>pointer</var>
        by one.
 
-       <li><p>Otherwise, set <var>url</var>'s <a for=url>cannot-be-a-base-URL flag</a>, append an
-       empty string to <var>url</var>'s <a for=url>path</a>, and set <var>state</var> to
-       <a>cannot-be-a-base-URL path state</a>.
+       <li><p>Otherwise, set <var>url</var>'s <a for=url>cannot-be-a-base-URL flag</a>,
+       <a for=list>append</a> an empty string to <var>url</var>'s <a for=url>path</a>, and set
+       <var>state</var> to <a>cannot-be-a-base-URL path state</a>.
       </ol>
 
      <li><p>Otherwise, if <var>state override</var> is not given, set
@@ -1446,8 +1447,8 @@ string <var>input</var>, optionally with a <a>base URL</a> <var>base</var>, opti
        <var>url</var>'s <a for=url>port</a> to
        <var>base</var>'s <a for=url>port</a>,
        <var>url</var>'s <a for=url>path</a> to
-       <var>base</var>'s <a for=url>path</a>, and then remove
-       <var>url</var>'s <a for=url>path</a>'s last entry, if any.
+       <var>base</var>'s <a for=url>path</a>, and then <a for=list>remove</a>
+       <var>url</var>'s <a for=url>path</a>'s last item, if any.
 
        <li><p>Set <var>state</var> to <a>path state</a>,
        and decrease <var>pointer</var> by one.
